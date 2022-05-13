@@ -1,0 +1,10 @@
+#!C:/Program\ Files/Git/usr/bin/sh.exe
+matches=$(git diff-index --patch HEAD | grep '^+' | grep -Pi 'password|keyword2|keyword3')
+if [ ! -z "$matches" ]
+then
+    cat <<\EOT
+Error: Words from the blocked list were present in the diff:
+EOT
+    echo $matches
+    exit 1 
+fi
